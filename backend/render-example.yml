@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: inventory-backend
+    env: node
+    plan: starter
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: node dist/server.js
+    envVars:
+      - key: SUPABASE_URL
+        value: MUST_REPLACE
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        value: MUST_REPLACE
+      - key: PORT
+        value: 4000
+      - key: FRONTEND_ORIGIN
+        value: https://your-frontend-on-vercel.example

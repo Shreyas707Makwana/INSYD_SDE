@@ -1,0 +1,106 @@
+{
+  "info": {
+    "name": "Inventory Visibility API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/api/items", "host": ["{{baseUrl}}"], "path": ["api","items"]},
+        "body": {"mode": "raw", "raw": "{\n  \"sku\": \"SKU-999\",\n  \"name\": \"Test Item\",\n  \"category\": \"Demo\",\n  \"quantity\": 5,\n  \"low_stock_threshold\": 2\n}"}
+      }
+    },
+    {
+      "name": "List Items",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": {"raw": "{{baseUrl}}/api/items?q=&page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["api","items"], "query": [
+          {"key": "q", "value": ""}, {"key": "page", "value": "1"}, {"key": "limit", "value": "10"}
+        ]}
+      }
+    },
+    {
+      "name": "Get Item",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": {"raw": "{{baseUrl}}/api/items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","items","{{id}}"]}
+      }
+    },
+    {
+      "name": "Update Item",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/api/items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","items","{{id}}"]},
+        "body": {"mode": "raw", "raw": "{\n  \"name\": \"Updated Item\"\n}"}
+      }
+    },
+    {
+      "name": "Delete Item",
+      "request": {
+        "method": "DELETE",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": {"raw": "{{baseUrl}}/api/items/{{id}}", "host": ["{{baseUrl}}"], "path": ["api","items","{{id}}"]}
+      }
+    },
+    {
+      "name": "Stock In",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/api/items/{{id}}/stock-in", "host": ["{{baseUrl}}"], "path": ["api","items","{{id}}","stock-in"]},
+        "body": {"mode": "raw", "raw": "{\n  \"amount\": 3,\n  \"note\": \"Restock demo\"\n}"}
+      }
+    },
+    {
+      "name": "Stock Out",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{access_token}}"}
+        ],
+        "url": {"raw": "{{baseUrl}}/api/items/{{id}}/stock-out", "host": ["{{baseUrl}}"], "path": ["api","items","{{id}}","stock-out"]},
+        "body": {"mode": "raw", "raw": "{\n  \"amount\": 2,\n  \"note\": \"Orders\"\n}"}
+      }
+    },
+    {
+      "name": "Low Stock",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": {"raw": "{{baseUrl}}/api/items/low-stock?threshold=5", "host": ["{{baseUrl}}"], "path": ["api","items","low-stock"], "query": [
+          {"key": "threshold", "value": "5"}
+        ]}
+      }
+    },
+    {
+      "name": "Auth Verify",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": {"raw": "{{baseUrl}}/api/auth/verify", "host": ["{{baseUrl}}"], "path": ["api","auth","verify"]},
+        "body": {"mode": "raw", "raw": "{\n  \"token\": \"{{access_token}}\"\n}"}
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:4000"},
+    {"key": "access_token", "value": ""}
+  ]
+}
