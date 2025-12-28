@@ -25,25 +25,26 @@ This project addresses a common operational problem: limited visibility into sto
 
 ```mermaid
 flowchart LR
-  subgraph Frontend [Next.js App Router]
-    UI[Pages & Components]
-    Auth[Supabase Auth (Browser)]
+  subgraph Frontend["Frontend - Next.js App Router"]
+    UI["Pages and Components"]
+    Auth["Supabase Auth - Browser"]
   end
 
-  subgraph Backend [Express + TypeScript]
-    Routes[REST API]
-    Zod[Zod Validation]
-    Guard[Auth Middleware]
-    RPC[Supabase RPC]
+  subgraph Backend["Backend - Express TypeScript"]
+    Routes["REST API"]
+    Validate["Request Validation"]
+    Guard["Auth Middleware"]
+    RPC["Supabase RPC"]
   end
 
-  DB[(Postgres)]
+  DB["Supabase PostgreSQL"]
 
   UI --> Routes
   Auth --> UI
-  Routes --> Zod
+  Routes --> Validate
   Routes --> Guard
-  Routes --> RPC --> DB
+  Routes --> RPC
+  RPC --> DB
 ```
 
 ## Environment Variables
